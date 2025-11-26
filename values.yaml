@@ -295,6 +295,13 @@ service:
     dist: dist
     epmd: epmd
     metrics: metrics
+  ports:
+    amqp: 5672
+    amqpTls: 5671
+    manager: 15672
+    dist: 25672
+    epmd: 4369
+    metrics: 9419
   nodePorts:
     amqp: ""
     amqpTls: ""
