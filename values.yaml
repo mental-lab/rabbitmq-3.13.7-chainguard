@@ -8,8 +8,10 @@
 ##
 global:
   imageRegistry: ""
-  imagePullSecrets: []
+  imagePullSecrets:
+    - name: cgr-registry-secret
   storageClass: ""
+
 ## @section Common parameters
 ##
 # @param kubeVersion Override Kubernetes version
@@ -45,9 +47,11 @@ extraDeploy: []
 ##
 image:
   registry: cgr.dev
-  repository: chainguard/rabbitmq
+  repository: chainguard-private/rabbitmq
   tag: 3.13.7
   digest: ""
+  pullSecrets:
+    - cgr-registry-secret
   ## set to true if you would like to see extra information on logs
   ## It turns BASH and/or NAMI debugging in the image
   ##
