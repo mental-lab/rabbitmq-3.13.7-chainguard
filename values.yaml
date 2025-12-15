@@ -663,6 +663,8 @@ podSecurityContext:
   fsGroupChangePolicy: Always
   supplementalGroups: []
   sysctls: []
+  seccompProfile:
+    type: RuntimeDefault
 ## @param automountServiceAccountToken Mount Service Account token
 ##
 automountServiceAccountToken: false
