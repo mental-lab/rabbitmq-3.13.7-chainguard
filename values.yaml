@@ -623,8 +623,28 @@ startupProbe:
 # @param customReadinessProbe Custom readiness probe
 # @param customStartupProbe Custom startup probe
 ##
-customLivenessProbe: {}
-customReadinessProbe: {}
+customLivenessProbe:
+  exec:
+    command:
+      - /bin/bash
+      - -ec
+      - rabbitmq-diagnostics -q ping
+  initialDelaySeconds: 120
+  periodSeconds: 30
+  timeoutSeconds: 20
+  failureThreshold: 6
+  successThreshold: 1
+customReadinessProbe:
+  exec:
+    command:
+      - /bin/bash
+      - -ec
+      - rabbitmq-diagnostics -q check_running && rabbitmq-diagnostics -q check_local_alarms
+  initialDelaySeconds: 10
+  periodSeconds: 30
+  timeoutSeconds: 20
+  failureThreshold: 3
+  successThreshold: 1
 customStartupProbe: {}
 ## @param resourcesPreset Set container resources according to one common preset (allowed values: none, nano, small, medium, large, xlarge, 2xlarge). This is ignored if resources is set.
 # @param resources Set container requests and limits for different resources like CPU or memory. If you want to allow pods to run on any available node, omit resources.
