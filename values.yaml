@@ -490,7 +490,19 @@ sidecars: []
 ## See https://kubernetes.io/docs/concepts/workloads/pods/init-containers/
 ## NOTE: Disabled for RabbitMQ 3.13.7 compatibility
 ##
-initContainers: []
+initContainers:
+  - name: setup-plugins
+    image: cgr.dev/chainguard/busybox:latest
+    command:
+      - sh
+      - -c
+      - |
+        mkdir -p /etc/rabbitmq
+        echo "[rabbitmq_management,rabbitmq_peer_discovery_k8s,rabbitmq_auth_backend_ldap]." > /etc/rabbitmq/enabled_plugins
+        chmod 644 /etc/rabbitmq/enabled_plugins
+    volumeMounts:
+      - name: rabbitmq-config-volume
+        mountPath: /etc/rabbitmq
 ## @section Pod parameters
 ##
 # @param replicaCount Number of RabbitMQ replicas to deploy
@@ -662,15 +674,15 @@ resources: {}
 containerSecurityContext:
   enabled: true
   seLinuxOptions: {}
-  runAsUser: 999
-  runAsGroup: 999
+  runAsUser: 1001
+  runAsGroup: 1001
   runAsNonRoot: true
   allowPrivilegeEscalation: false
   readOnlyRootFilesystem: false
   capabilities:
     drop: ["ALL"]
-  seccompProfile:
-    type: RuntimeDefault
+  # seccompProfile:
+  #   type: RuntimeDefault
 ## @param podSecurityContext.enabled Enable pod security context
 # @param podSecurityContext.fsGroup Set RabbitMQ pod's Security Context fsGroup
 # @param podSecurityContext.fsGroupChangePolicy Set RabbitMQ pod's Security Context fsGroupChangePolicy
@@ -679,12 +691,12 @@ containerSecurityContext:
 ##
 podSecurityContext:
   enabled: true
-  fsGroup: 999
+  fsGroup: 1001
   fsGroupChangePolicy: Always
   supplementalGroups: []
   sysctls: []
-  seccompProfile:
-    type: RuntimeDefault
+  # seccompProfile:
+  #   type: RuntimeDefault
 ## @param automountServiceAccountToken Mount Service Account token
 ##
 automountServiceAccountToken: false
@@ -857,10 +869,14 @@ serviceBindings:
   enabled: false
 ## @param extraVolumeMounts Extra volume mounts to add to the RabbitMQ pods
 ##
-extraVolumeMounts: []
+extraVolumeMounts:
+  - name: rabbitmq-config-volume
+    mountPath: /etc/rabbitmq
 ## @param extraVolumes Extra volumes to add to the RabbitMQ pods
 ##
-extraVolumes: []
+extraVolumes:
+  - name: rabbitmq-config-volume
+    emptyDir: {}
 ## @param extraDeploy Extra objects to deploy
 ##
 extraDeploy: []
