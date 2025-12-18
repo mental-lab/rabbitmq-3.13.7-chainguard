@@ -1,0 +1,15 @@
+# Exclude git history and build artifacts from helm package
+.git/
+.gitignore
+*.tgz
+.DS_Store
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# Exclude development files
+deploy.sh
+README.md
+.github/
