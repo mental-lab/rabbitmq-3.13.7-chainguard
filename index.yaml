@@ -1,48 +1,20 @@
 apiVersion: v1
 entries:
-  common:
-  - annotations:
-      category: Infrastructure
-      licenses: Apache-2.0
-    apiVersion: v2
-    appVersion: 2.31.4
-    created: "2025-12-18T09:42:08.243189-08:00"
-    description: A Library Helm Chart for grouping common logic between bitnami charts.
-      This chart is not deployable by itself.
-    digest: 91311247f88ab95dd202d03971294561ff70bc65fd45e5de7705eb91fd0f310c
-    home: https://bitnami.com
-    icon: https://dyltqmyl993wv.cloudfront.net/downloads/logos/bitnami-mark.png
-    keywords:
-    - common
-    - helper
-    - template
-    - function
-    - bitnami
-    maintainers:
-    - name: Broadcom, Inc. All Rights Reserved.
-      url: https://github.com/bitnami/charts
-    name: common
-    sources:
-    - https://github.com/bitnami/charts/tree/main/bitnami/common
-    type: library
-    urls:
-    - https://mental-lab.github.io/rabbitmq-3.13.7-chainguard/charts/common-2.31.4.tgz
-    version: 2.31.4
   rabbitmq:
   - annotations:
       category: Infrastructure
       licenses: Apache-2.0
     apiVersion: v2
     appVersion: 3.13.7
-    created: "2025-12-18T09:42:08.242648-08:00"
+    created: "2025-12-18T12:38:20.757755-08:00"
     dependencies:
     - name: common
-      repository: https://charts.bitnami.com/bitnami
+      repository: file://./charts/common
       version: 2.x.x
     description: RabbitMQ is an open source general-purpose message broker that is
       designed for consistent, highly-available messaging scenarios (both synchronous
       and asynchronous).
-    digest: 833ac3a58a39393c24f9e5fd28d90e4376ae0e3b57d204449ebb8457a37c131a
+    digest: 606b6cf3f8a8926f5afbb8b887db8997289afe15ecba2cac1bb382daa7e99c1b
     home: https://chainguard.dev
     keywords:
     - rabbitmq
@@ -52,4 +24,4 @@ entries:
     urls:
     - https://mental-lab.github.io/rabbitmq-3.13.7-chainguard/rabbitmq-14.7.0.tgz
     version: 14.7.0
-generated: "2025-12-18T09:42:08.230352-08:00"
+generated: "2025-12-18T12:38:20.755998-08:00"
