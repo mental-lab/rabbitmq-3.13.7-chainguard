@@ -167,7 +167,36 @@ spec:
               mountPath: /emptydir
         */}}
         {{- if .Values.initContainers }}
-        {{- include "common.tplvalues.render" (dict "value" .Values.initContainers "context" $) | nindent 8 }}
+        {{- range .Values.initContainers }}
+        - name: {{ .name }}
+          image: {{ .image }}
+          {{- if .command }}
+          command: {{- toYaml .command | nindent 12 }}
+          {{- end }}
+          {{- if .args }}
+          args: {{- toYaml .args | nindent 12 }}
+          {{- end }}
+          {{- if .env }}
+          env: {{- toYaml .env | nindent 12 }}
+          {{- end }}
+          {{- if .volumeMounts }}
+          volumeMounts: {{- toYaml .volumeMounts | nindent 12 }}
+          {{- end }}
+          securityContext:
+            {{- if .securityContext }}
+            {{- toYaml .securityContext | nindent 12 }}
+            {{- else }}
+            allowPrivilegeEscalation: false
+            capabilities:
+              drop:
+                - ALL
+            readOnlyRootFilesystem: false
+            runAsGroup: 1001
+            runAsNonRoot: true
+            runAsUser: 1001
+            seLinuxOptions: {}
+            {{- end }}
+        {{- end }}
         {{- end }}
       containers:
         - name: rabbitmq

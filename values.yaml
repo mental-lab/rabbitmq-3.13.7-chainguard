@@ -503,6 +503,16 @@ initContainers:
     volumeMounts:
       - name: rabbitmq-config-volume
         mountPath: /etc/rabbitmq
+    securityContext:
+      allowPrivilegeEscalation: false
+      capabilities:
+        drop:
+          - ALL
+      readOnlyRootFilesystem: false
+      runAsGroup: 1001
+      runAsNonRoot: true
+      runAsUser: 1001
+      seLinuxOptions: {}
 ## @section Pod parameters
 ##
 # @param replicaCount Number of RabbitMQ replicas to deploy
