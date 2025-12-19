@@ -513,6 +513,8 @@ initContainers:
       runAsNonRoot: true
       runAsUser: 1001
       seLinuxOptions: {}
+      seccompProfile:
+        type: RuntimeDefault
 ## @section Pod parameters
 ##
 # @param replicaCount Number of RabbitMQ replicas to deploy
@@ -691,8 +693,8 @@ containerSecurityContext:
   readOnlyRootFilesystem: false
   capabilities:
     drop: ["ALL"]
-  # seccompProfile:
-  #   type: RuntimeDefault
+  seccompProfile:
+    type: RuntimeDefault
 ## @param podSecurityContext.enabled Enable pod security context
 # @param podSecurityContext.fsGroup Set RabbitMQ pod's Security Context fsGroup
 # @param podSecurityContext.fsGroupChangePolicy Set RabbitMQ pod's Security Context fsGroupChangePolicy
