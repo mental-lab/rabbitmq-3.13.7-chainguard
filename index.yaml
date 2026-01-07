@@ -6,7 +6,7 @@ entries:
       licenses: Apache-2.0
     apiVersion: v2
     appVersion: 3.13.7
-    created: "2026-01-07T07:13:37.238357-08:00"
+    created: "2026-01-07T07:23:08.051067-08:00"
     dependencies:
     - name: common
       repository: file://./charts/common
@@ -14,7 +14,7 @@ entries:
     description: RabbitMQ is an open source general-purpose message broker that is
       designed for consistent, highly-available messaging scenarios (both synchronous
       and asynchronous).
-    digest: f7900a7276c91ff1f4f1bcd66f0771a370160fb1b8e0f014edf3927788a315d3
+    digest: 6ad083a0c96efb851877ee5da01218a66ab389f62c8ad3bae860c2d301bf6d6c
     home: https://chainguard.dev
     keywords:
     - rabbitmq
@@ -24,4 +24,4 @@ entries:
     urls:
     - https://mental-lab.github.io/rabbitmq-3.13.7-chainguard/rabbitmq-14.7.0.tgz
     version: 14.7.0
-generated: "2026-01-07T07:13:37.234084-08:00"
+generated: "2026-01-07T07:23:08.047192-08:00"
