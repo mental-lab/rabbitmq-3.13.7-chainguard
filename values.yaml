@@ -509,9 +509,9 @@ initContainers:
         drop:
           - ALL
       readOnlyRootFilesystem: false
-      runAsGroup: 1001
+      runAsGroup: 999
       runAsNonRoot: true
-      runAsUser: 1001
+      runAsUser: 999
       seLinuxOptions: {}
       seccompProfile:
         type: RuntimeDefault
@@ -686,8 +686,8 @@ resources: {}
 containerSecurityContext:
   enabled: true
   seLinuxOptions: {}
-  runAsUser: 1001
-  runAsGroup: 1001
+  runAsUser: 999
+  runAsGroup: 999
   runAsNonRoot: true
   allowPrivilegeEscalation: false
   readOnlyRootFilesystem: false
@@ -703,7 +703,7 @@ containerSecurityContext:
 ##
 podSecurityContext:
   enabled: true
-  fsGroup: 1001
+  fsGroup: 999
   fsGroupChangePolicy: Always
   supplementalGroups: []
   sysctls: []
